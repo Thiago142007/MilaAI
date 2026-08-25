@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mila - 3D AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.0/umd/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <!-- Fullscreen 3D Canvas -->
+  <div id="vrm-canvas-container"></div>
+
+  <!-- Top/Center Glassmorphism Voice Settings Modal -->
+  <div id="voice-settings-modal" class="hidden">
+    <div class="voice-settings-card">
+      <div class="settings-header">
+        <h3>🎙️ Configurações de Voz (Kokoro-82M Local)</h3>
+        <button id="voice-settings-close" class="close-btn" title="Fechar">✕</button>
+      </div>
+
+      <div class="settings-body">
+        <div class="setting-item">
+          <label for="voice-select">Voz:</label>
+          <select id="voice-select" class="glass-select">
+            <option value="pf_dora" selected>pf_dora (Feminina · Português Brasil)</option>
+            <option value="pm_alex">pm_alex (Masculina · Português Brasil)</option>
+            <option value="pm_santa">pm_santa (Masculina · Português Brasil)</option>
+            <option value="af_heart">af_heart (Feminina · Inglês Americano)</option>
+            <option value="af_bella">af_bella (Feminina · Inglês Americano)</option>
+            <option value="af_sarah">af_sarah (Feminina · Inglês Americano)</option>
+            <option value="bf_emma">bf_emma (Feminina · Inglês Britânico)</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label for="voice-speed">Velocidade: <span id="voice-speed-val">1.0x</span></label>
+          <input type="range" id="voice-speed" min="0.5" max="2.0" step="0.05" value="1.0" class="glass-range" />
+        </div>
+
+        <div class="setting-item">
+          <label for="voice-volume">Volume: <span id="voice-volume-val">100%</span></label>
+          <input type="range" id="voice-volume" min="0.0" max="1.5" step="0.05" value="1.0" class="glass-range" />
+        </div>
+
+        <div class="setting-item">
+          <label for="voice-device">Dispositivo:</label>
+          <select id="voice-device" class="glass-select">
+            <option value="auto" selected>AUTO (Detectar GPU / CPU)</option>
+            <option value="cuda">CUDA (GPU NVIDIA)</option>
+            <option value="cpu">CPU (Processador)</option>
+          </select>
+        </div>
+
+        <div class="settings-actions">
+          <button id="voice-test-btn" class="glass-action-btn test-btn">▶ Testar Voz</button>
+          <button id="voice-stop-btn" class="glass-action-btn stop-btn">⏹ Parar Fala</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Center Glassmorphism Interaction Bar -->
+  <div id="bottom-glass-bar">
+    <button id="mic-btn" class="glass-btn mic" title="Gravar Áudio / Falar">
+      <svg class="mic-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" y1="19" x2="12" y2="23"/>
+        <line x1="8" y1="23" x2="16" y2="23"/>
+      </svg>
+    </button>
+
+    <div class="input-wrapper">
+      <input type="text" id="chat-input" placeholder="Converse com a Mila ou peça uma automação..." autocomplete="off" />
+    </div>
+
+    <button id="send-btn" class="glass-btn send" title="Enviar Mensagem">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+
+    <button id="tts-btn" class="glass-btn tts active" title="Alternar Voz">🔊</button>
+    <button id="settings-btn" class="glass-btn settings" title="Configurações de Voz">⚙️</button>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
+

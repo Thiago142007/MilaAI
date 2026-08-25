@@ -1,0 +1,41 @@
+{
+  "name": "nova-ai-vtuber",
+  "version": "1.0.0",
+  "description": "NOVA - Autonomous Multimodal AI Robot Assistant for Windows with 3D VTuber Avatar",
+  "main": "dist/server/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server/server.js",
+    "dev": "tsx src/server/server.ts"
+  },
+  "keywords": [
+    "ai",
+    "vtuber",
+    "vrm",
+    "threejs",
+    "agent",
+    "windows-automation",
+    "multimodal"
+  ],
+  "author": "NOVA Team",
+  "license": "MIT",
+  "dependencies": {
+    "@pixiv/three-vrm": "^3.3.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "screenshot-desktop": "^1.15.1",
+    "three": "^0.173.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "@types/three": "^0.173.0",
+    "@types/ws": "^8.5.14",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
